@@ -3,11 +3,17 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 
 interface InitialWeatherState {
-	name: string;
+	searchValue: string;
+	forecast: any[];
+	error?: string;
+	loading: boolean;
 }
 
 const initialState: InitialWeatherState = {
-	name: "",
+	searchValue: "",
+	forecast: [],
+	error: "",
+	loading: false,
 };
 
 export const fetchWeather = createAsyncThunk(
@@ -15,11 +21,14 @@ export const fetchWeather = createAsyncThunk(
 	async (city: string) => {
 		try {
 			const req = await axios.get(
-				`http://api.weatherapi.com/v1/forecast.json?key=4e9fd92539b24046a4d125728240901&q=${city}&days=1&aqi=no&alerts=no`,
+				`http://api.weatherapi.com/v1/forecast.json?key=4e9fd92539b24046a4d125728240901&q=${city}&days=4&aqi=no&alerts=no`,
 			);
-			return req.data;
+			if (req) {
+				return req.data;
+			}
+			return req;
 		} catch (error: any) {
-			throw new Error("There was an error" + error.message);
+			return error.message;
 		}
 	},
 );
@@ -27,19 +36,32 @@ export const fetchWeather = createAsyncThunk(
 export const weatherSlice = createSlice({
 	name: "weather",
 	initialState,
-	reducers: {},
+	reducers: {
+		setSearchValue: (state, action: PayloadAction<string>) => {
+			if (action.payload) {
+				state.searchValue = action.payload;
+			}
+		},
+	},
 	extraReducers(builder) {
 		builder
-			.addCase(fetchWeather.pending, (state, payload) => {})
-			.addCase(fetchWeather.fulfilled, (state, payload) => {
-				console.log("success");
-				console.log(payload);
+			.addCase(fetchWeather.pending, (state, action) => {
+				state.loading = true;
 			})
-			.addCase(fetchWeather.rejected, (state, payload) => {
-				console.log("error");
+			.addCase(fetchWeather.fulfilled, (state, action) => {
+				state.loading = false;
+				if (action.payload === "Request failed with status code 400") {
+					state.error = "Location not found";
+				} else {
+					state.error = "";
+					state.forecast.push(action.payload.forecast.forecastday);
+				}
+			})
+			.addCase(fetchWeather.rejected, (state, action: any) => {
+				state.loading = false;
 			});
 	},
 });
 
-export const {} = weatherSlice.actions;
+export const { setSearchValue } = weatherSlice.actions;
 export default weatherSlice.reducer;
