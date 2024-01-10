@@ -21,7 +21,7 @@ export const fetchWeather = createAsyncThunk(
 	async (city: string) => {
 		try {
 			const req = await axios.get(
-				`http://api.weatherapi.com/v1/forecast.json?key=4e9fd92539b24046a4d125728240901&q=${city}&days=4&aqi=no&alerts=no`,
+				`http://api.weatherapi.com/v1/forecast.json?key=4e9fd92539b24046a4d125728240901&q=${city}&days=7&aqi=no&alerts=no`,
 			);
 			if (req) {
 				return req.data;
