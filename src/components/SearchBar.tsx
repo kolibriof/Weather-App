@@ -12,20 +12,27 @@ const SearchBar: React.FC = () => {
 	const dispatch = useWeatherDispatch();
 	const { searchValue } = useWeatherSelector((store) => store.weather);
 	const SearchBarClickHandler = () => {
-		const searchBar = document.getElementById("searchBarInput")!;
-		searchBar.focus();
+		const searchBarInput = document.getElementById("searchBarInput")!;
+
+		searchBarInput.focus();
 	};
 	const forecastHandler = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+		const searchBar = document.getElementById("wholeBar")!;
+		const searchBarInput = document.getElementById("searchBarInput")!;
 		if (searchValue) {
 			dispatch(fetchWeather(searchValue));
+			searchBar.classList.replace("w-[50%]", "w-[25%]");
+			searchBar.classList.add("opacity-50");
+			searchBarInput.blur();
 		}
 	};
+
 	return (
 		<section className='h-[20%] w-full flex justify-center items-start pt-3'>
 			<div
-				className='initialBarRender flex flex-row w-[50%] bg-cyan-200 p-5 rounded-2xl items-center shadow-md cursor-text'
-				onMouseOver={() => {}}
+				className='initialBarRender flex flex-row w-[50%] bg-cyan-100 p-5 rounded-2xl items-center shadow-md cursor-text focus-within:opacity-100 focus-within:w-[50%] transition-all duration-[800ms]'
+				id='wholeBar'
 				onClick={SearchBarClickHandler}>
 				<div className='flex flex-1'>
 					<form onSubmit={forecastHandler}>

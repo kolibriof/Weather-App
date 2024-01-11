@@ -1,11 +1,17 @@
+import React from "react";
 import { useWeatherSelector } from "../features/hooks/reducerHook";
 import "../styles/blocksStyle.css";
 import ForecastNextDays from "./forecast_components/ForecastNextDays";
 
 const Forecast = () => {
-	const { forecast, loading } = useWeatherSelector((store) => store.weather);
+	const { forecast, loading, error } = useWeatherSelector(
+		(store) => store.weather,
+	);
 	if (loading) {
 		return <div className='text-[25px]'>Loading....</div>;
+	}
+	if (error) {
+		return <div className='text-[25px]'>{error}</div>;
 	}
 	const BackgroundImageSetting = (date: string) => {
 		let todaysDate = new Date().getDate();
@@ -30,7 +36,7 @@ const Forecast = () => {
 										<div className='text-[3rem] flex flex-grow'>
 											{e.day.condition.text}
 										</div>
-										<div className='text-[5rem] flex '>
+										<div className='text-[5rem] flex'>
 											{e.day.avgtemp_c + "°C"}
 										</div>
 									</header>

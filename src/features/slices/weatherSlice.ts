@@ -51,7 +51,7 @@ export const weatherSlice = createSlice({
 			.addCase(fetchWeather.fulfilled, (state, action) => {
 				state.loading = false;
 				if (action.payload === "Request failed with status code 400") {
-					state.error = "Location not found";
+					state.error = "Location not found.";
 				} else {
 					state.error = "";
 					state.forecast.push(action.payload.forecast.forecastday);

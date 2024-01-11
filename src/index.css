@@ -6,4 +6,5 @@ body {
 	background-image: url("./media/bg.jpeg");
 	background-size: 100% 100%;
 	background-repeat: no-repeat;
+	font-family: "Roboto Condensed", sans-serif;
 }
