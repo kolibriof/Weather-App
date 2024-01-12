@@ -32,11 +32,12 @@ const Forecast = () => {
 								return (
 									<header
 										key={e.date}
-										className='flex flex-row items-center justify-center w-full px-20'>
+										className='flex flex-row items-center justify-center w-full px-20 drop-shadow-xl'>
 										<div className='text-[3rem] flex flex-grow'>
+											<img src={e.day.condition.icon} alt='current_condition' />
 											{e.day.condition.text}
 										</div>
-										<div className='text-[5rem] flex'>
+										<div className='text-[5rem] flex drop-shadow-xl'>
 											{e.day.avgtemp_c + "°C"}
 										</div>
 									</header>

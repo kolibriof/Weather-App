@@ -54,6 +54,8 @@ export const weatherSlice = createSlice({
 					state.error = "Location not found.";
 				} else {
 					state.error = "";
+					console.log(action.payload.forecast.forecastday);
+
 					state.forecast = [action.payload.forecast.forecastday];
 				}
 			})
