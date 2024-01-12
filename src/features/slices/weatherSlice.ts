@@ -45,7 +45,7 @@ export const weatherSlice = createSlice({
 	},
 	extraReducers(builder) {
 		builder
-			.addCase(fetchWeather.pending, (state, action) => {
+			.addCase(fetchWeather.pending, (state, _) => {
 				state.loading = true;
 			})
 			.addCase(fetchWeather.fulfilled, (state, action) => {
@@ -54,10 +54,10 @@ export const weatherSlice = createSlice({
 					state.error = "Location not found.";
 				} else {
 					state.error = "";
-					state.forecast.push(action.payload.forecast.forecastday);
+					state.forecast = [action.payload.forecast.forecastday];
 				}
 			})
-			.addCase(fetchWeather.rejected, (state, action: any) => {
+			.addCase(fetchWeather.rejected, (state) => {
 				state.loading = false;
 			});
 	},
