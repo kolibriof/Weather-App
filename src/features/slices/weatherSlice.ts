@@ -67,3 +67,4 @@ export const weatherSlice = createSlice({
 
 export const { setSearchValue } = weatherSlice.actions;
 export default weatherSlice.reducer;
+export { initialState };

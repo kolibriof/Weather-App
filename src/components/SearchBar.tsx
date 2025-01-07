@@ -42,6 +42,7 @@ const SearchBar: React.FC = () => {
 							onChange={(e) => dispatch(setSearchValue(e.target.value))}
 							placeholder='Enter a city...'
 							className='bg-inherit font-normal focus:outline-none placeholder:text-black placeholder:opacity-50 placeholder:tracking-wider placeholder:font-[600]'
+							data-testid='search-input'
 						/>
 					</form>
 				</div>

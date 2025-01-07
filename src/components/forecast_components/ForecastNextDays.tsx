@@ -31,6 +31,7 @@ const ForecastNextDays = () => {
 							hidden ? `visible--v1` : `hide`
 						}.png`}
 						alt='hide'
+						data-testid='hide-button'
 					/>
 				</div>
 				<div className='flex flex-row justify-evenly mb-10 flex-wrap'>
