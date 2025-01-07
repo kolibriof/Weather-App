@@ -8,10 +8,10 @@ const Forecast = () => {
 		(store) => store.weather,
 	);
 	if (loading) {
-		return <div className='text-[25px]'>Loading....</div>;
+		return <div className='text-[25px]' data-testid='loading'>Loading....</div>;
 	}
 	if (error) {
-		return <div className='text-[25px]'>{error}</div>;
+		return <div className='text-[25px]' data-testid='error'>{error}</div>;
 	}
 	const BackgroundImageSetting = (date: string) => {
 		let todaysDate = new Date().getDate();
