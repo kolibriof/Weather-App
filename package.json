@@ -31,7 +31,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint .",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "ci": "npm run lint && npm test"
   },
   "eslintConfig": {
     "extends": [

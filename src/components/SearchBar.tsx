@@ -29,7 +29,8 @@ const SearchBar: React.FC = () => {
 			<div
 				className='initialBarRender flex flex-row w-[50%] bg-cyan-100 p-5 rounded-2xl items-center shadow-md cursor-text focus-within:opacity-100 focus-within:w-[50%] transition-all duration-[700ms]'
 				id='wholeBar'
-				onClick={() => document.getElementById("searchBarInput")!.focus()}>
+				onClick={() => document.getElementById("searchBarInput")!.focus()}
+				data-testid='search-bar-container'>
 				<div className='flex flex-1'>
 					<form onSubmit={forecastHandler}>
 						<input

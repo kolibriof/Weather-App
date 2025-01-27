@@ -17,3 +17,8 @@ test('renders Forecast component', () => {
   const { getByTestId } = render(<Forecast />);
   expect(getByTestId('loading')).toBeInTheDocument();
 });
+
+test('renders App component without crashing', () => {
+  const { getByTestId } = render(<App />);
+  expect(getByTestId('root')).toBeInTheDocument();
+});

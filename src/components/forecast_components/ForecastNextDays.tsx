@@ -22,7 +22,8 @@ const ForecastNextDays = () => {
 				} bg-opacity-90 transition-all duration-700 ease-out  ${
 					hidden ? `translate-y-[80%]` : `translate-y-[0%]`
 				}`}
-				id='weather-footer'>
+				id='weather-footer'
+				data-testid='forecast-container'>
 				<div className='hide-bar flex justify-center'>
 					<img
 						onClick={() => setHidden(!hidden)}

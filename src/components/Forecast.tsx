@@ -20,7 +20,7 @@ const Forecast = () => {
 	};
 
 	return (
-		<section className='flex flex-col flex-grow gap-3 min-w-[100%] min-h-80 justify-between'>
+		<section className='flex flex-col flex-grow gap-3 min-w-[100%] min-h-80 justify-between' data-testid='forecast-container'>
 			<div className='flex weather-block justify-center'>
 				{forecast.length >= 1
 					? forecast[0].map((e: any) => {
