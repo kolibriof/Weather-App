@@ -16,15 +16,11 @@ const Forecast = () => {
 	const BackgroundImageSetting = (date: string) => {
 		let todaysDate = new Date().getDate();
 		let forecastDate = new Date(date).getDate();
-		if (todaysDate === forecastDate) {
-			return true;
-		} else {
-			return false;
-		}
+		return todaysDate === forecastDate;
 	};
 
 	return (
-		<section className='flex flex-col flex-grow gap-3 min-w-[100%] min-h-80 justify-between'>
+		<section className='flex flex-col flex-grow gap-3 min-w-[100%] min-h-80 justify-between' data-testid='forecast-container'>
 			<div className='flex weather-block justify-center'>
 				{forecast.length >= 1
 					? forecast[0].map((e: any) => {
@@ -43,9 +39,9 @@ const Forecast = () => {
 									</header>
 								);
 							}
-							return "";
+							return null;
 					  })
-					: ""}
+					: null}
 			</div>
 			<ForecastNextDays />
 		</section>

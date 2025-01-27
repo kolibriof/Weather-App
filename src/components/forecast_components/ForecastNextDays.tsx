@@ -5,11 +5,13 @@ import moment from "moment";
 const ForecastNextDays = () => {
 	const [hidden, setHidden] = useState(false);
 	const { forecast } = useWeatherSelector((store) => store.weather);
-	const BackgroundImageSetting = (date: string) => {
+
+	const isToday = (date: string) => {
 		let todaysDate = new Date().getDate();
 		let forecastDate = new Date(date).getDate();
 		return todaysDate === forecastDate;
 	};
+
 	if (forecast.length >= 1) {
 		return (
 			<div
@@ -20,7 +22,8 @@ const ForecastNextDays = () => {
 				} bg-opacity-90 transition-all duration-700 ease-out  ${
 					hidden ? `translate-y-[80%]` : `translate-y-[0%]`
 				}`}
-				id='weather-footer'>
+				id='weather-footer'
+				data-testid='forecast-container'>
 				<div className='hide-bar flex justify-center'>
 					<img
 						onClick={() => setHidden(!hidden)}
@@ -35,38 +38,35 @@ const ForecastNextDays = () => {
 					/>
 				</div>
 				<div className='flex flex-row justify-evenly mb-10 flex-wrap'>
-					{forecast.length >= 1
-						? forecast[0].map((e: any) => {
-								if (!BackgroundImageSetting(e.date)) {
-									return (
-										<header
-											className='flex flex-row justify-center items-center rounded-xl p-3 shadow-lg bg-cyan-100 text-2xl gap-5 hover:scale-110 transition-all hover:cursor-pointer hover:shadow-2xl'
-											key={e.date}>
-											<div className='flex justify-center flex-col items-center gap-2 p-2'>
-												<div>{moment(e.date).format("MMM Do")}</div>
-												<div className='flex flex-col items-center'>
-													<div className='flex'>
-														<p>{e.day.condition.text}</p>
-													</div>
-													<div className='flex'>
-														<img
-															className='drop-shadow-lg'
-															src={e.day.condition.icon}
-															alt='weather condition'
-														/>
-													</div>
-												</div>
-												<div className='flex flex-col font-bold text-[2rem]'>
-													<div className='flex'>{e.day.avgtemp_c + "°C"}</div>
-												</div>
+					{forecast[0].map((e: any) => {
+						if (!isToday(e.date)) {
+							return (
+								<header
+									className='flex flex-row justify-center items-center rounded-xl p-3 shadow-lg bg-cyan-100 text-2xl gap-5 hover:scale-110 transition-all hover:cursor-pointer hover:shadow-2xl'
+									key={e.date}>
+									<div className='flex justify-center flex-col items-center gap-2 p-2'>
+										<div>{moment(e.date).format("MMM Do")}</div>
+										<div className='flex flex-col items-center'>
+											<div className='flex'>
+												<p>{e.day.condition.text}</p>
 											</div>
-										</header>
-									);
-								}
-
-								return "";
-						  })
-						: ""}
+											<div className='flex'>
+												<img
+													className='drop-shadow-lg'
+													src={e.day.condition.icon}
+													alt='weather condition'
+												/>
+											</div>
+										</div>
+										<div className='flex flex-col font-bold text-[2rem]'>
+											<div className='flex'>{e.day.avgtemp_c + "°C"}</div>
+										</div>
+									</div>
+								</header>
+							);
+						}
+						return null;
+					})}
 				</div>
 			</div>
 		);
@@ -74,4 +74,5 @@ const ForecastNextDays = () => {
 		return null;
 	}
 };
+
 export default ForecastNextDays;
