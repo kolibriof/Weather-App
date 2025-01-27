@@ -16,11 +16,7 @@ const Forecast = () => {
 	const BackgroundImageSetting = (date: string) => {
 		let todaysDate = new Date().getDate();
 		let forecastDate = new Date(date).getDate();
-		if (todaysDate === forecastDate) {
-			return true;
-		} else {
-			return false;
-		}
+		return todaysDate === forecastDate;
 	};
 
 	return (
@@ -43,9 +39,9 @@ const Forecast = () => {
 									</header>
 								);
 							}
-							return "";
+							return null;
 					  })
-					: ""}
+					: null}
 			</div>
 			<ForecastNextDays />
 		</section>

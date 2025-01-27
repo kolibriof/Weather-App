@@ -11,11 +11,7 @@ import "../styles/searchBarStyle.css";
 const SearchBar: React.FC = () => {
 	const dispatch = useWeatherDispatch();
 	const { searchValue } = useWeatherSelector((store) => store.weather);
-	const SearchBarClickHandler = () => {
-		const searchBarInput = document.getElementById("searchBarInput")!;
 
-		searchBarInput.focus();
-	};
 	const forecastHandler = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const searchBar = document.getElementById("wholeBar")!;
@@ -33,7 +29,7 @@ const SearchBar: React.FC = () => {
 			<div
 				className='initialBarRender flex flex-row w-[50%] bg-cyan-100 p-5 rounded-2xl items-center shadow-md cursor-text focus-within:opacity-100 focus-within:w-[50%] transition-all duration-[700ms]'
 				id='wholeBar'
-				onClick={SearchBarClickHandler}>
+				onClick={() => document.getElementById("searchBarInput")!.focus()}>
 				<div className='flex flex-1'>
 					<form onSubmit={forecastHandler}>
 						<input
